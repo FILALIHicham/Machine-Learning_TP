@@ -6,7 +6,7 @@ def generateGraph(S, wop, hyperplan):
     for e in S:
         if e[1] == 1 :plt.plot(e[0][1], e[0][2], "o", color = 'red')
         else :plt.plot(e[0][1], e[0][2], "*", color = 'green')
-    x = [0,30]
+    x = [0,20]
     y = [hyperplan(wop, x[0]),hyperplan(wop, x[1])]
     plt.plot(x, y,'-b')
     plt.show()
