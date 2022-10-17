@@ -28,7 +28,7 @@ def PLA(S, w0, hyperplan, visualize = False):
         t += 1
         conv = Ls(S,w,n)
     if visualize : generateGraph(S, w, hyperplan)
-    return (w, conv, t)
+    return (w, conv, t+1)
 
 # hyperplan equation (in 2D)
 def hyperplan(wop,x):
