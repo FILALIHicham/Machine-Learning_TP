@@ -14,8 +14,14 @@ def Ls(S, w, n):
         ans += kronecker(S[i][0], S[i][1], w)
     return ans/n
 
+def saveIterations(t_list,conv_list,t,conv):
+    t_list.append(t)
+    conv_list.append(conv)
+
 # the Perceptron algorithm
-def PLA(S, w0, hyperplan, visualize = False):
+def PLA(S, w0, hyperplan, visualize = False, save = False):
+    t_list = []
+    conv_list = []
     n = len(S)
     t = 0
     w = np.array(w0)
@@ -27,8 +33,10 @@ def PLA(S, w0, hyperplan, visualize = False):
                     w[j][0] += S[i][1] * S[i][0][j]
         t += 1
         conv = Ls(S,w,n)
+        if save : saveIterations(t_list, conv_list, t, conv)
     if visualize : generateGraph(S, w, hyperplan)
-    return (w, conv, t+1)
+    if save : return (w, conv, t+1 , t_list, conv_list)
+    else : return (w, conv, t+1)
 
 # hyperplan equation (in 2D)
 def hyperplan(wop,x):
