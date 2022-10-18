@@ -13,7 +13,7 @@ The ```main.py``` and ```data.py``` files are respectively used to use the metho
 The following markdown is a synthesis of the results of the previous algorithms.
 
 ## Plot of a set of randomized data in 2D
-The ````data.py``` was used to generate a set of random points in the space labeled $-1$ or $1$. We can configure the distribution of the points in the 2D space in such a way that the dataset is separable or not separable. However, the points of each category are uniformly distributed in a sub rectangle area of the whole plan.
+The ```data.py``` was used to generate a set of random points in the space labeled $-1$ or $1$. We can configure the distribution of the points in the 2D space in such a way that the dataset is separable or not separable. However, the points of each category are uniformly distributed in a sub rectangle area of the whole plan.
 
 !["a set of non separable data in 2D"](./figures/dataset.png)
 
@@ -23,11 +23,11 @@ The ````data.py``` was used to generate a set of random points in the space labe
 
 !["PLA results"](./figures/PLA.png)
 
-2. Pocket with linearly non-separable randomized data ($T_{max} = 100$):
+2. Pocket with linearly non-separable randomized data ( $ T_{max} = 100 $ ):
  
 !["Pocket"](./figures/pocket.png)
 
-3. Adaline (delta rule variant) with linearly non-separable randomized data ($T_{max} = 100$ and $\alpha = 0.0001$):
+3. Adaline (delta rule variant) with linearly non-separable randomized data ( $ T_{max} = 100 $ and $\alpha = 0.0001$):
 
 !["Adaline: delta rule"](./figures/adaline.png)
 
