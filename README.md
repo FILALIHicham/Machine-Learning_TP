@@ -34,8 +34,10 @@ The PLA is the fastest algorithm in matter of number of iterations. Actually, it
 
 ### Empirical error evolution
 !["empirical error evolution: 3 algorithms in 1 plot"](./figures/Emperical Error 2.png)
+
 The speed of convergence of the Adaline algorithm is the slowest among the 3 algorithms. Also, the value of its empirical error is the biggest among them, with a very big marge of difference. This could be explained by the nature of the loss function in the Adaline case: summing the square of the differences results in a very big value.
 !["empirical error evolution: 3 algorithms in 1 plot"](./figures/Emperical Error 1.png)
+
 The PLA algirthm also has generally a fatser speed of convergence and a more accurate result comparing to the Pocket algorithm as we can see in the previous plot. Furthermore, the Pocket algorithm seems to stop its convergence starting from a certain iteration and enters in a random oscillation character.
 
 
