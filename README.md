@@ -23,10 +23,12 @@ The ````data.py``` was used to generate a set of random points in the space labe
 !["PLA results"](./figures/PLA.png)
 
 2. Pocket with linearly non-separable randomized data ($T_{max} = 100$):
-!["pocket"](./figures/pocket.png)
+ 
+!["Pocket"](./figures/pocket.png)
 
 3. Adaline (delta rule variant) with linearly non-separable randomized data ($T_{max} = 100$ and $\alpha = 0.0001$):
-!["adaline: delta rule"](./figures/adaline.png)
+
+!["Adaline: delta rule"](./figures/adaline.png)
 
 ## Comparing the 3 algorithms:
 ### Number of iterations
