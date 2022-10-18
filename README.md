@@ -20,6 +20,7 @@ The ````data.py``` was used to generate a set of random points in the space labe
 ## Plot results of each algorithm on a random dataset
 
 1. PLA with linearly separable randomized data:
+
 !["PLA results"](./figures/PLA.png)
 
 2. Pocket with linearly non-separable randomized data ($T_{max} = 100$):
