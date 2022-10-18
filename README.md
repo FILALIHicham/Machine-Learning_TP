@@ -27,7 +27,7 @@ The ```data.py``` was used to generate a set of random points in the space label
  
 !["Pocket"](./figures/pocket.png)
 
-3. Adaline (delta rule variant) with linearly non-separable randomized data ( $ T_{max} = 100 $ and $\alpha = 0.0001$):
+3. Adaline (delta rule variant) with linearly non-separable randomized data ( $ T_{max}$ $= 100 $ and $\alpha = 0.0001$):
 
 !["Adaline: delta rule"](./figures/adaline.png)
 
