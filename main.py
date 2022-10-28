@@ -11,25 +11,25 @@ S_3D_nsep = generateData3D(200,[0,15,5,20],[0,15,5,20],[0,15,5,20])
 
 w0 = np.array([[0.76], [0.46], [0.26], [0.11]])
 
-# print("Perceptron Learning Algorithm:")
-# startTime = time.time()
-# wop1, convPLA, t1, t1_list, conv1_list, w1_list = PLA(S_3D_sep, w0, hyperplan3D, viz_mode="3d", visualize=True, save = True)
-# endTime = time.time()
-# print("w.T =", wop1.T,"| Ls(w) =", convPLA, "| t =", t1)
-# PLATime = endTime - startTime
-# # print("t1_list= ", t1_list)
-# # print("conv1_list= ", conv1_list)
-# print("Execution time: ", PLATime)
-
-print("\nPocket Algorithm:")
+print("Perceptron Learning Algorithm:")
 startTime = time.time()
-wop2, convPocket, t2 = Pocket(S_3D_nsep, w0, 100, hyperplan3D, viz_mode="3d", visualize=True)
+wop1, convPLA, t1, t1_list, conv1_list, w1_list = PLA(S_3D_sep, w0, hyperplan3D, viz_mode="3d", visualize=True, save = True)
 endTime = time.time()
-print("w.T =", wop2,"| Ls(w) =", convPocket, "| t =", t2)
-PocketTime = endTime - startTime
-# print("t2_list= ", t2_list)
-# print("conv2_list= ", conv2_list)
-print("Execution time: ", PocketTime)
+print("w.T =", wop1.T,"| Ls(w) =", convPLA, "| t =", t1)
+PLATime = endTime - startTime
+# print("t1_list= ", t1_list)
+# print("conv1_list= ", conv1_list)
+print("Execution time: ", PLATime)
+
+# print("\nPocket Algorithm:")
+# startTime = time.time()
+# wop2, convPocket, t2 = Pocket(S_3D_nsep, w0, 100, hyperplan3D, viz_mode="3d", visualize=True)
+# endTime = time.time()
+# print("w.T =", wop2,"| Ls(w) =", convPocket, "| t =", t2)
+# PocketTime = endTime - startTime
+# # print("t2_list= ", t2_list)
+# # print("conv2_list= ", conv2_list)
+# print("Execution time: ", PocketTime)
 
 
 # print("\nAdaline Algorithm:")
