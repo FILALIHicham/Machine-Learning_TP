@@ -2,9 +2,10 @@ from perceptron import PLA, Ls, saveIterations
 import numpy as np
 from data import generateGraph
 
-def Pocket(S, w, Tmax, hyperplan, visualize = False, save = False): 
+def Pocket(S, w, Tmax, hyperplan, viz_mode, visualize = False, save = False): 
     t_list = []
     conv_list = []
+    w_list=[]
     t = 0
     conv = 1
     w0 = np.array(w)
@@ -17,8 +18,8 @@ def Pocket(S, w, Tmax, hyperplan, visualize = False, save = False):
                     w[j][0] += S[i][1] * S[i][0][j]
         t += 1
         conv = Ls(S,w,n)
-        if save : saveIterations(t_list, conv_list, t, conv)
+        if save : saveIterations(w_list, t_list, conv_list, w0, t, conv)
         if Ls(S, w0, len(S)) > Ls(S, w, len(S)) : w0 = w
-    if visualize : generateGraph(S, w0, hyperplan)
-    if save : return (w0, Ls(S, w0, len(S)), t+1, t_list, conv_list)
-    else : return (w0, Ls(S, w0, len(S)), t+1)
+    if visualize : generateGraph(S, w0, hyperplan, mode = viz_mode)
+    if save : return (w0, Ls(S, w0, len(S)), t, t_list, conv_list, w_list)
+    else : return (w0, Ls(S, w0, len(S)), t)
