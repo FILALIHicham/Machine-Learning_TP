@@ -2,16 +2,25 @@ from perceptron import PLA, Ls, saveIterations
 import numpy as np
 from data import generateGraph
 
-def Pocket(S, w, Tmax, hyperplan, viz_mode, visualize = False, save = False): 
+# the Pocket Algorithm
+def Pocket(S, w, Tmax, hyperplan, viz_mode, visualize = False, save = False):
+    '''
+    S: the dataset, composed of tuples (xi,yi)
+    w: initial weight vector
+    Tmax: upper bound of the iterations of the pocket algorithm 
+    hyperplan: the equation of the hyperplan to find
+    viz_mode: either "2d" or "3d"
+    vizualize: turn True to plot the hyperplan and the data, False by default
+    save: turn True to save return also a list of the intermediate PLA results
+    '''
     t_list = []
     conv_list = []
     w_list=[]
     t = 0
-    conv = 1
     w0 = np.array(w)
+    n = len(S)
+    conv = Ls(S,w,n)
     while t < Tmax and conv:
-        n = len(S)
-        conv = Ls(S,w,n)
         for i in range(n):
             if np.sign(w.T @ S[i][0]) * S[i][1] < 0:
                 for j in range(len(w)):

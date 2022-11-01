@@ -1,26 +1,46 @@
 import numpy as np 
 from data import generateGraph
 
-# function that returns 0 if X == Y, 1 otherwise
+# function that returns 0 if y == y_pred, 1 otherwise
 def kronecker(x,y,w):
+    '''
+    x: vector e.i. 1 line in the dataset
+    y: the list of x (-1 or 1)
+    w: the weight vector
+    '''
     y_pred = np.sign(w.T @ x)
     if y != y_pred : return 1
     return 0
 
-# loss function
+# loss function based on the Kronecker function
+# returns the percentage of misclassified vectors
 def Ls(S, w, n):
+    '''
+    S: the dataset, composed of tuples (xi,yi)
+    w: weight vector
+    n: size of S
+    '''
     ans = 0
     for i in range(n):
         ans += kronecker(S[i][0], S[i][1], w)
     return ans/n
 
+# helper function to save the results of the optimul search at each iteration
 def saveIterations(w_list, t_list, conv_list, w, t, conv):
     w_list.append(w)
     t_list.append(t)
     conv_list.append(conv)
 
-# the Perceptron algorithm
+# the Perceptron Learning Algorithm
 def PLA(S, w0, hyperplan, viz_mode, visualize = False, save = False):
+    '''
+    S: the dataset, composed of tuples (xi,yi)
+    w0: initial weight vector
+    hyperplan: the equation of the hyperplan to find
+    viz_mode: either "2d" or "3d"
+    vizualize: turn True to plot the hyperplan and the data, False by default
+    save: turn True to save return also a list of the intermediate PLA results
+    '''
     t_list = []
     conv_list = []
     w_list=[]

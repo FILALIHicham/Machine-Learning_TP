@@ -4,22 +4,36 @@ from adaline import *
 from pocket import *
 import time
 
+
+'''
+generation of uniformly randomized data of 3 types:
+
+S_nsep: linearly non separable data in 2D
+S_sep: linearly separable data in 2D
+S_3D_sep: linearly separable data in 3D
+S_3D_nsep: linearly non separable data in 3D
+'''
 S_nsep = generateData(200,0,15,5,20,0,15,5,20)
 S_sep = generateData(100,0,10,10,20,0,10,10,20)
 S_3D_sep = generateData3D(100,[0,9,11,20],[0,9,11,20],[0,9,11,20])
-S_3D_nsep = generateData3D(200,[0,15,5,20],[0,15,5,20],[0,15,5,20])
+S_3D_nsep = generateData3D(50,[0,15,5,20],[0,15,5,20],[0,15,5,20])
 
+# random start weight vector for 3D
 w0 = np.array([[0.76], [0.46], [0.26], [0.11]])
+# random start weight vector for 2D
+w00 = np.array([[0.76], [0.46], [0.26]])
 
-print("Perceptron Learning Algorithm:")
-startTime = time.time()
-wop1, convPLA, t1, t1_list, conv1_list, w1_list = PLA(S_3D_sep, w0, hyperplan3D, viz_mode="3d", visualize=True, save = True)
-endTime = time.time()
-print("w.T =", wop1.T,"| Ls(w) =", convPLA, "| t =", t1)
-PLATime = endTime - startTime
-# print("t1_list= ", t1_list)
-# print("conv1_list= ", conv1_list)
-print("Execution time: ", PLATime)
+# uncomment the code to execute 1 algorithm
+
+# print("Perceptron Learning Algorithm:")
+# startTime = time.time()
+# wop1, convPLA, t1, t1_list, conv1_list, w1_list = PLA(S_3D_sep, w0, hyperplan3D, viz_mode="3d", visualize=True, save = True)
+# endTime = time.time()
+# print("w.T =", wop1.T,"| Ls(w) =", convPLA, "| t =", t1)
+# PLATime = endTime - startTime
+# # print("t1_list= ", t1_list)
+# # print("conv1_list= ", conv1_list)
+# print("Execution time: ", PLATime)
 
 # print("\nPocket Algorithm:")
 # startTime = time.time()
@@ -42,7 +56,8 @@ print("Execution time: ", PLATime)
 # # print("conv3_list= ", conv3_list)
 # print("Execution time: ", AdalineTime)
 
-# Comparing the execution time of each algorithm
+# this part was used to compare the execution time of each algorithm
+
 # bar = {'Pocket Algorithm':PocketTime, 'Adaline Algorithm':AdalineTime}
 # algorithms = list(bar.keys())
 # duration = list(bar.values())
@@ -52,7 +67,7 @@ print("Execution time: ", PLATime)
 # plt.title("Comparison of the execution time of each algorithm.")
 # plt.show()
 
-# # Comparing the emperical error of each algorithm
+# this part was used to compare the emperical error of each algorithm
 # plt.plot(t1_list, conv1_list,'-b', label="Perceptron")
 # plt.plot(t2_list, conv2_list,'-r', label="Pocket")
 # # plt.plot(t3_list, conv3_list,'-g', label="Adaline")
@@ -60,40 +75,4 @@ print("Execution time: ", PLATime)
 # plt.xlabel("Iterations")
 # plt.ylabel("Emperical Error")
 # plt.title("Comparison of the emperical error evolution of each algorithm.")
-# plt.show()
-
-
-
-# import matplotlib.animation as animation
-
-# # fig, ax = plt.subplots()
-
-# # x = [0,20]
-# # y = [hyperplan(wop, x[0]),hyperplan(wop, x[1])]
-# # line, = ax.plot(x, y)
-
-# def calc_y(w_list, x, hyperplan):
-#     return [[hyperplan(w, x[0]), hyperplan(w, x[1])] for w in w_list]
-
-
-# def init():
-#     line.set_data([],[])
-#     return line
-
-# def animate(i):
-#     line.set_data(x,Y[i])  # update the data.
-#     # line.set_data(x[1],Y[i][1])  # update the data.
-#     return line,
-
-
-# fig = plt.figure()
-# ax = plt.axes(xlim=(0, 20), ylim=(0, 20))
-# x = [0,20]
-# Y = calc_y(w2_list, x,hyperplan)
-# line, = ax.plot([], [])
-# print(Y)
-# print(w2_list)
-
-# ani = animation.FuncAnimation( fig, animate,init_func=init, frames=len(Y), interval=1000)
-# plt.draw()
 # plt.show()
