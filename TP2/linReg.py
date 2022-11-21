@@ -1,25 +1,39 @@
 import numpy as np
+# y = a*x + b
+def loss(a,b,x,y):
+    err = 0
+    for i in range(len(x)):
+        err += (y[i] - (a * x[i] + b))**2
+    return err/float(len(x))
 
-# y = c + x * m : regression line => 
+def gradient(a,b,x,y,rate):
+    a_grad, b_grad = 0, 0
+    n = len(x)
 
-# def linReg(X,Y):
-#     n = len(X)
-#     SX, SY = sum(X), sum(Y)
-#     m = (n * sum([X[i] * Y[i] for i in range(n)]) - SX * SY)/(n*sum([x**2 for x in X]) - SX ** 2)
-#     c = (SY - m * SX)/n
-#     return (m, c)
+    for i in range(n):
+        a_grad += -(2/n) * x[i] * (y[i] - (a * x[i] + b))
+        b_grad += -(2/n) * (y[i] - (a * x[i] + b))
 
-# def loss(y, y_pred):
-#     return sum([(y[i] - y_pred[i])**2 for i in range(len(y))])/len(y)
+    a0 = a - a_grad * rate
+    b0 = b - b_grad * rate
+    return a0, b0
 
+def linearReg(x,y):
+    n = len(x)
+    Sx = sum(x)
+    Sf = sum(y)
+    Sxx = sum([i**2 for i in x])
+    Sfx = sum(x[i] * y[i] for i in range(n))
+    b = (Sxx * Sf - Sx * Sfx)/(n * Sxx - Sx**2)
+    a = (-Sx * Sf + n * Sfx)/(n * Sxx - Sx**2)
+    return a, b
 
-def Ls(X, y, w): # X is a matrix
-    return sum([(y[i] - w.dot(X[i]))**2 for i in range(len(y))]) / len(y)
-
-def gradLs(X, y, w):
-    return 2.0 * sum([X[i].dot(y[i] - w.dot(X[i])) for i in range(len(y))]) / len(y)
-
-def linRegOpt(X, y, e):
-    w = np.zeros(len(X[0]))
-    while gradLs(X, y, w) > e:
-        w -= 0.001 * gradLs(X, y, w)
+def Lossf(x, y):
+    Sff = sum([i**2 for i in y])
+    n = len(x)
+    Sx = sum(x)
+    Sf = sum(y)
+    Sxx = sum([i**2 for i in x])
+    Sfx = sum(x[i] * y[i] for i in range(n))
+    Sffpred = ((Sf ** 2) * Sxx - 2 * Sf * Sx * Sfx + n * (Sfx ** 2))/(n * Sxx - (Sx ** 2))
+    return (Sff - Sffpred)
