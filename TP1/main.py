@@ -13,10 +13,10 @@ S_sep: linearly separable data in 2D
 S_3D_sep: linearly separable data in 3D
 S_3D_nsep: linearly non separable data in 3D
 '''
-S_nsep = generateData(200,0,15,5,20,0,15,5,20)
+S_nsep = generateData(200,0,11,9,20,0,11,9,20)
 S_sep = generateData(100,0,10,10,20,0,10,10,20)
 S_3D_sep = generateData3D(100,[0,9,11,20],[0,9,11,20],[0,9,11,20])
-S_3D_nsep = generateData3D(50,[0,15,5,20],[0,15,5,20],[0,15,5,20])
+S_3D_nsep = generateData3D(100,[0,15,5,20],[0,15,5,20],[0,15,5,20])
 
 # random start weight vector for 3D
 w0 = np.array([[0.76], [0.46], [0.26], [0.11]])
@@ -35,20 +35,20 @@ w00 = np.array([[0.76], [0.46], [0.26]])
 # # print("conv1_list= ", conv1_list)
 # print("Execution time: ", PLATime)
 
-# print("\nPocket Algorithm:")
-# startTime = time.time()
-# wop2, convPocket, t2 = Pocket(S_3D_nsep, w0, 100, hyperplan3D, viz_mode="3d", visualize=True)
-# endTime = time.time()
-# print("w.T =", wop2,"| Ls(w) =", convPocket, "| t =", t2)
-# PocketTime = endTime - startTime
-# # print("t2_list= ", t2_list)
-# # print("conv2_list= ", conv2_list)
-# print("Execution time: ", PocketTime)
+print("\nPocket Algorithm:")
+startTime = time.time()
+wop2, convPocket, t2 = Pocket(S_3D_nsep, w0, 100, hyperplan3D, viz_mode="3d", visualize=True)
+endTime = time.time()
+print("w.T =", wop2,"| Ls(w) =", convPocket, "| t =", t2)
+PocketTime = endTime - startTime
+# print("t2_list= ", t2_list)
+# print("conv2_list= ", conv2_list)
+print("Execution time: ", PocketTime)
 
 
 # print("\nAdaline Algorithm:")
 # startTime = time.time()
-# wop3, convAdaline, t3 = adaline(S_3D_sep, w0, 300, hyperplan3D, visualize=True, viz_mode="3d")
+# wop3, convAdaline, t3 = adaline(S_nsep, w00, 300, hyperplan, visualize=True, viz_mode="2d")
 # endTime = time.time()
 # print("w.T =", wop3,"| Ls(w) =", convAdaline, "| t =", t3)
 # AdalineTime = endTime - startTime

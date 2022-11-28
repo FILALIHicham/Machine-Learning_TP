@@ -110,17 +110,10 @@ X = np.hstack((one, X))
 #print(X)
 
 
-#------------la fonction sgmoid---------------#
+#------------la fonction sigmoid---------------#
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
-def gradient(x, y, w):
-    som = 0
-    for i in range(m):
-        t1 = (-y[i] * np.exp(-y[i] * np.dot(w, x[i])))
-        t2 = 1/(1 + np.exp(-y[i] * np.dot(w, x[i])))
-        som +=  (t1/t2) * x[i]
-    return som/m
 
 #--------------lossfunction-------------------------------#
 def lossfunction(x, y, w):
@@ -129,6 +122,15 @@ def lossfunction(x, y, w):
          som += np.log(1 + np.exp(-y[i]*(np.dot(w, x[i]))))
 
     return som/m
+
+def gradient(x, y, w):
+    som = 0
+    for i in range(m):
+        t1 = (-y[i] * np.exp(-y[i] * np.dot(w, x[i])))
+        t2 = 1/(1 + np.exp(-y[i] * np.dot(w, x[i])))
+        som +=  (t1 * t2) * x[i]
+    return som/m
+
 
 #--------Algorithme de regression logistique---------------#
 def RergessionLogistic(x, targets, w):
@@ -141,7 +143,7 @@ def RergessionLogistic(x, targets, w):
         gradloss = gradient(x, targets, w)
         print(np.linalg.norm(gradloss))
         compteur+=1
-    loss= lossfunction(x, targets, w)
+    loss = lossfunction(x, targets, w)
     print(loss)
     print("le nombre des iterations est : ", compteur)
     return w

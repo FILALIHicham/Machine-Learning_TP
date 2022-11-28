@@ -4,7 +4,7 @@ from nonLinTr import *
 X, Y = [],[]
 
 # open and format data 
-with open('ex2data2.csv', mode='r') as csv_file:
+with open('TP4/ex2data2.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     for row in csv_reader:
         X.append([1,float(row["x1"]), float(row["x2"])])
