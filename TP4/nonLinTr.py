@@ -1,56 +1,60 @@
 import numpy as np
 
 # sigmpid activation function
-def sigmoid(x, w):
+def sigmoid(x):
     '''
-    x: a vector of features
-    w: weight vector
+    x: a vector
     '''
-    return 1/(1 + np.exp(- w.T @ x))
+    return 1/(1 + np.exp(x))
 
 # cost function of the logistic regression
-def costLogReg(X,Y,h,w):
+def costLogReg(x,y,w):
     """
-    X: table of vectors x_i
-    Y: list of labels of each vector x_i in X
-    h: activation function
+    x: a vector x_i
+    y: the label y_i associated
+    w: weight vector
     """
-    m = len(X)
-    som = 0
-    for i in range(m):
-        som += -Y[i] * np.log(h(X[i],w)) - (1 - Y[i]) * np.log(1 - h(X[i],w))
-    return som/m
+    return np.log(1 + np.exp(-y * np.dot(w,x)))
 
 # gradient of cost function
-def gradCost(X,Y,h,w):
+def gradCost(x,y,h,w):
     """
-    X: table of vectors x_i
-    Y: vector of labels y_i
+    x: a vector x_i
+    y: the label y_i associated
+    w: weight vector
     h: activation function
     """
     grad = []
     d = len(w)
+    fact = h(- y * np.dot(w,x))
+    grad = [-y * np.exp( -y * np.dot(w,x)) * x[i] for i in range(d)]
+    return np.dot(fact,grad)
+
+def Grad(X,Y,h,w):
     m = len(X)
-    for j in range(d):
-        som = 0
+    d = len(w)
+    L = [0] * d
+    for row in range(m):
+        x = gradCost(X[row], Y[row], h, w)
         for i in range(m):
-            som += (h(X[i],w) - Y[i]) * X[i][j]
-        grad.append(som/m)
-    return grad
+            L[i] += x[i]
+    for i in range(d):
+        L[i] /= m
+    return L
 
 # logistic regression algorithm
 def RergessionLogistic(X,Y,h,w):
     compteur = 0 #initialisation de compteur
-    learning_rate = 0.01
-    gradloss = gradCost(X,Y,h,w)
-    while(np.linalg.norm(gradloss) > 0.01):
+    lr = 0.01
+    loss = Grad(X,Y,h,w)
+    while(np.linalg.norm(loss) > 0.01):
         #update gradient
         for i in range(len(w)):
-            w[i] -= learning_rate *  gradloss[i]
-        gradloss = gradCost(X,Y,h,w)
-        print(np.linalg.norm(gradloss))
-        compteur+=1
-    loss = costLogReg(X,Y,h,w)
+            w[i] -= lr *  loss[i]
+        loss = Grad(X,Y,h,w)
+        print(np.linalg.norm(loss))
+        compteur += 1
+    loss = costLogReg(X,Y,w)
     print(loss)
     print("le nombre des iterations est : ", compteur)
     return w
